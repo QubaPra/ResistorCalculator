@@ -8,30 +8,20 @@ using namespace std;
 struct tab {
 long double wartosc;
 string nazwa;
-bool operator<(const tab &x)const
-{
-    return wartosc<x.wartosc;
-}
-
 };
 
 vector<long double> resistors={10,100,220,470,1000,2200,4700,10000,22000,47000,100000,220000,1000000,10000000};
 long double liczba, a;
 int b, startres=resistors.size();
-tab tablica[100000];
-
-
+vector<tab> tablica;
 
 void megatablica ()
 {
-    int k=startres;
     for(int i = 0; i<startres;i++)
     {
         for(int j = 0;j<startres;j++)
         {
-            tablica[k].wartosc=(tablica[i].wartosc*tablica[j].wartosc)/(tablica[i].wartosc+tablica[j].wartosc);
-            tablica[k].nazwa=tablica[i].nazwa+ " & " + tablica[j].nazwa;
-           k++;
+            tablica.push_back({(tablica[i].wartosc*tablica[j].wartosc)/(tablica[i].wartosc+tablica[j].wartosc),tablica[i].nazwa+ " & " + tablica[j].nazwa});
         }
     }
     for(int l=0;l<startres;l++)
@@ -40,9 +30,7 @@ void megatablica ()
         {
             for(int j = 0;j<startres;j++)
             {
-                tablica[k].wartosc=(tablica[i].wartosc*tablica[j].wartosc*tablica[l].wartosc)/(tablica[i].wartosc+tablica[j].wartosc+tablica[l].wartosc);
-                tablica[k].nazwa=tablica[i].nazwa+ " & " + tablica[j].nazwa+ " & " + tablica[l].nazwa;
-               k++;
+                tablica.push_back({(tablica[i].wartosc*tablica[j].wartosc*tablica[l].wartosc)/(tablica[i].wartosc+tablica[j].wartosc+tablica[l].wartosc),tablica[i].nazwa+ " & " + tablica[j].nazwa+ " & " + tablica[l].nazwa});
             }
         }
     }
@@ -54,23 +42,22 @@ void megatablica ()
             {
                 for(int j = 0;j<startres;j++)
                 {
-                    tablica[k].wartosc=(tablica[i].wartosc*tablica[j].wartosc*tablica[l].wartosc*tablica[m].wartosc)/(tablica[i].wartosc+tablica[j].wartosc+tablica[l].wartosc+tablica[m].wartosc);
-                    tablica[k].nazwa=tablica[i].nazwa+ " & " + tablica[j].nazwa+ " & " + tablica[l].nazwa+ " & " + tablica[m].nazwa;
-                   k++;
+                    tablica.push_back({(tablica[i].wartosc*tablica[j].wartosc*tablica[l].wartosc*tablica[m].wartosc)/(tablica[i].wartosc+tablica[j].wartosc+tablica[l].wartosc+tablica[m].wartosc),tablica[i].nazwa+ " & " + tablica[j].nazwa+ " & " + tablica[l].nazwa+ " & " + tablica[m].nazwa});
                 }
             }
         }
     }
-
 }
+
 int main() {
     for(int i=0; i<resistors.size();i++)
     {
-        tablica[i].wartosc=resistors[i];
-        tablica[i].nazwa=to_string((int)resistors[i]);
+        tablica.push_back({resistors[i],to_string((int)resistors[i])});
     }
     megatablica();
-    sort(tablica,tablica+41370);
+    sort(tablica.begin(), tablica.end(), [](const tab &x, const tab &y) {
+    return x.wartosc < y.wartosc;
+  });
 
     cout << "Enter resistance that you want to get: ";
     cin >> liczba;
