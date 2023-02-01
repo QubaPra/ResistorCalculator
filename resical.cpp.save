@@ -61,9 +61,9 @@ int main() {
     return x.wartosc < y.wartosc;
   });
 
-    cout << "\n\n" << "Enter resistance that you want to get: ";
+    cout << endl << endl << "Enter resistance that you want to get: ";
     cin >> liczba;
-    cout << "\n" << "You'll need:" << "\n";
+    cout << endl << "You'll need:" << endl;
     a=liczba;
     while(tablica[0].wartosc<=a)
     {
@@ -73,10 +73,10 @@ int main() {
         }
         a-=tablica[b].wartosc;
         cout << tablica[b].wartosc << ": ";
-        cout << tablica[b].nazwa << "\n";
+        cout << tablica[b].nazwa << endl;
     }
-    cout << "\n\n" << "Overall you can make:";
-    cout << "\n" << liczba-a << "\n";
+    cout << endl << endl << "\n\n Overall you can make:";
+    cout << endl << liczba-a << endl;
 
     return 0;
 }
