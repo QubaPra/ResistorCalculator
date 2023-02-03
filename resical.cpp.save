@@ -61,22 +61,26 @@ int main() {
     return x.wartosc < y.wartosc;
   });
 
-    cout << endl << endl << "Enter resistance that you want to get: ";
+    cout << "\n\n" << "Enter resistance that you want to get: ";
     cin >> liczba;
-    cout << endl << "You'll need:" << endl;
+    cout << "\n" << "You'll need:" << "\n";
     a=liczba;
     while(tablica[0].wartosc<=a)
     {
         for(int i=0;tablica[i].wartosc<=a;i++)
         {
-            b=i;
+            if (abs(tablica[i+1].wartosc-a)<abs(tablica[i].wartosc-a))
+                b=i+1;
+            else
+                b
         }
+        
         a-=tablica[b].wartosc;
         cout << tablica[b].wartosc << ": ";
-        cout << tablica[b].nazwa << endl;
+        cout << tablica[b].nazwa << "\n";
     }
-    cout << endl << endl << "\n\n Overall you can make:";
-    cout << endl << liczba-a << endl;
+    cout << "\n\n" << "Overall you can make:";
+    cout << "\n" << liczba-a << "\n";
 
     return 0;
 }

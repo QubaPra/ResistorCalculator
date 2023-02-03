@@ -69,8 +69,12 @@ int main() {
     {
         for(int i=0;tablica[i].wartosc<=a;i++)
         {
-            b=i;
+            if (abs(tablica[i+1].wartosc-a)<abs(tablica[i].wartosc-a))
+                b=i+1;
+            else
+                b=i;
         }
+
         a-=tablica[b].wartosc;
         cout << tablica[b].wartosc << ": ";
         cout << tablica[b].nazwa << "\n";
